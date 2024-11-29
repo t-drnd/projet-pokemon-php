@@ -16,7 +16,7 @@ class Attack {
         $this->name = $value;
         return $this;
     }
-    public function setPower(string $value): self
+    public function setPower(int $value): self
     {
         $this->power = $value;
         return $this;
