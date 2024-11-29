@@ -26,4 +26,20 @@ class Attack {
         $this->precision = $value;
         return $this;
     }
+
+    
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    public function getPower(): int
+    {
+        return $this->power;
+    }
+    public function getPrecision(): float
+    {
+        return $this->precision;
+    }
+
+
 }

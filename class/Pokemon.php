@@ -53,5 +53,35 @@ class Pokemon {
     {
         return $this->attaques;
     }
+
+    public function attack($adversaire, $attaque) {
+        if (mt_rand(0, 100) / 100 <= $attaque->getPrecision()) {
+            echo "{$this->name} utilise {$attaque->getName()} sur {$adversaire->name}.\n";
+            $adversaire->recevoirDegats($attaque->getPower());
+        } else {
+            echo "{$this->name} utilise {$attaque->getName()}, mais échoue.\n";
+        }
+    }
+
+    public function recevoirDegats(int $degats): void
+    {
+        $this->hp = max(0, $this->hp - $degats);
+        echo "{$this->name} reçoit $degats dégâts. Il lui reste {$this->hp} pv.\n";
+    }
+
+    public function estKO(): bool
+    {
+        return $this->hp <= 0;
+    }
+
+    public function capaciteSpeciale(Pokemon $adversaire, Attack $attaque): void
+    {
+        if (mt_rand(0, 100) / 100 <= $attaque->getPrecision()) {
+            echo "{$this->name} utilise son attaque spéciale {$attaque->getName()} sur {$adversaire->name}.\n";
+            $adversaire->recevoirDegats($attaque->getPower());
+        } else {
+            echo "{$this->name} tente {$attaque->getName()}, mais échoue.\n";
+        }
+    }
 }
 

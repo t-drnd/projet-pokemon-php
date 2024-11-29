@@ -29,3 +29,10 @@ foreach ([$baseattack1, $baseattack2, $baseattack3] as $attaque) {
     $voltali->ajouterAttaque($attaque);
     $limonde->ajouterAttaque($attaque);
 }
+
+$lippoutou->ajouterAttaque($specialATKIce);
+$clamiral->ajouterAttaque($specialATKWater);
+$arcanin->ajouterAttaque($specialATKFire);
+$boustiflor->ajouterAttaque($specialATKPlant);
+$voltali->ajouterAttaque($specialATKElectric);
+$limonde->ajouterAttaque($specialATKGround);
