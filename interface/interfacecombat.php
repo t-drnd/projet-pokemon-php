@@ -1,6 +1,7 @@
 <?php
 
-interface Fight {
-    public function startFight($adversaire);
+interface Combattant {
+    public function startFight(Pokemon $adversaire): void;
+    public function capaciteSpeciale(Pokemon $adversaire): void;
 }
 

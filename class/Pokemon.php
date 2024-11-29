@@ -1,6 +1,7 @@
 <?php 
 
 class Pokemon {
+    use Soigner;
     private $name;
     private $type;
     private $hp;
@@ -54,7 +55,7 @@ class Pokemon {
         return $this->attaques;
     }
 
-    public function attack($adversaire, $attaque) {
+    public function attack(Pokemon $adversaire, Attack $attaque) {
         if (mt_rand(0, 100) / 100 <= $attaque->getPrecision()) {
             echo "{$this->name} utilise {$attaque->getName()} sur {$adversaire->name}.\n";
             $adversaire->recevoirDegats($attaque->getPower());
