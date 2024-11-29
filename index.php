@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="liste_pokemon">
-        <ul>
+        <h1>Choisissez votre Pokemon:</h1>
+        <ul class="pokemon_container">
             <li><a href="https://pokemondb.net/pokedex/stunfisk"><img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif" alt="Stunfisk"></a>Limonde</li>
             <li><a href="https://pokemondb.net/pokedex/samurott"><img src="https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif" alt="Samurott"></a>Clamiral</li>
             <li><a href="https://pokemondb.net/pokedex/jolteon"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif" alt="Jolteon"></a>Voltali</li>
