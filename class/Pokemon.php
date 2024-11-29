@@ -1,11 +1,18 @@
 <?php 
 
-abstract class Pokemon {
+class Pokemon {
     private $name;
     private $type;
     private $hp;
-    private $atkpower;
-    private $defense;
+    private array $attaques = [];
+
+    public function __construct(string $name, string $type, int $hp, array $attaques = [])
+    {
+        $this->name = $name;
+        $this->type = $type;
+        $this->hp = $hp;
+        $this->attaques = $attaques;
+    }
 
     public function setName(string $value): self
     {
@@ -22,15 +29,11 @@ abstract class Pokemon {
         $this->hp = $value;
         return $this;
     }
-    public function setATKPower(int $value): self
+
+
+    public function ajouterAttaque(Attack $attaque): void
     {
-        $this->atkpower = $value;
-        return $this;
-    }
-    public function setDefense(float $value): self
-    {
-        $this->defense = $value;
-        return $this;
+        $this->attaques[] = $attaque;
     }
 
     public function getName(): string
@@ -45,13 +48,10 @@ abstract class Pokemon {
     {
       return $this->hp;
     }
-    public function getATKPower(): int
+
+    public function getAttaques(): array
     {
-      return $this->atkpower;
-    }
-    public function getDefense(): float
-    {
-      return $this->defense;
+        return $this->attaques;
     }
 }
 
