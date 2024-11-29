@@ -1,7 +1,7 @@
 <?php
 
 class Attaque {
-    private $nom;
-    private $puissance;
+    private $name;
+    private $power;
     private $precision;
 }
