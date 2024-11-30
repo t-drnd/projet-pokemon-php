@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  background: #eeeeee;
+  height: 100vh;
+}
+
+.selectedpokemon {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 25px;
+  font-weight: 600;
+}
+
+.selectedpokemonimg {
+  height: 150px;
+  width: 150px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.mainbuttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.changepokemondiv {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.findfightdiv {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.mainbuttons button {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 25px 50px;
+  border: 2px solid #fff;
+}
+
+.mainbuttons button img {
+  width: 85%;
+  height: auto;
+}
+
+.switchp {
+  background: green;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.switchp:hover {
+  cursor: pointer;
+  background: rgb(0, 91, 0);
+}
+
+.findfight {
+  background: #e01111;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.findfight:hover {
+  cursor: pointer;
+  background: #9a0a0a;
+}
+
+.healbuttondiv {
+  position: relative;
+}
+
+.healbutton {
+  position: fixed;
+  bottom: 75px;
+  right: 50%;
+  transform: translateX(50%);
+  border: 2px solid #fff;
+  color: #000;
+  width: 350px;
+  height: 65px;
+  background: #ffb6c1;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.healbutton:hover {
+  cursor: pointer;
+  background: #df8d9a;
+  color: #fff;
+}
