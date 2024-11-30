@@ -11,14 +11,45 @@
         <div class="liste_pokemon">
             <h1>Choisissez votre Pokemon:</h1>
             <div class="pokemon_container">
-            <ul>
-                <li><a href="https://pokemondb.net/pokedex/stunfisk"><img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif" alt="Stunfisk"></a>Limonde</li>
-                <li><a href="https://pokemondb.net/pokedex/samurott"><img src="https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif" alt="Samurott"></a>Clamiral</li>
-                <li><a href="https://pokemondb.net/pokedex/jolteon"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif" alt="Jolteon"></a>Voltali</li>
-                <li><a href="https://pokemondb.net/pokedex/jynx"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif" alt="Jynx"></a>Lippoutou</li>
-                <li><a href="https://pokemondb.net/pokedex/weepinbell"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif" alt="Weepinbell"></a>Boustiflor</li>
-                <li><a href="https://pokemondb.net/pokedex/arcanine"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif" alt="Arcanine"></a>Arcanin</li>
-            </ul>
+                <form action="maininterface.php" method="get">
+                        <button type="submit" name="pokemon" value="Limonde">
+                            <li>
+                                <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif" alt="Stunfisk">
+                                Limonde
+                            </li>
+                        </button>
+                        <button type="submit" name="pokemon" value="Clamiral">
+                            <li>
+                                <img src="https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif" alt="Samurott">
+                                Clamiral
+                            </li>
+                        </button>
+                        <button type="submit" name="pokemon" value="Voltali">
+                            <li>
+                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif" alt="Jolteon">
+                                Voltali
+                            </li>
+                        </button>
+                        <button type="submit" name="pokemon" value="Lippoutou">
+                            <li> 
+                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif" alt="Jynx">
+                                Lippoutou
+                            </li>
+                        </button>
+                        <button type="submit" name="pokemon" value="Boustiflor">
+                            <li> 
+                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif" alt="Weepinbell">
+                                Boustiflor
+                            </li>
+                        </button>
+                        <button type="submit" name="pokemon" value="Arcanin">
+                            <li>
+                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif" alt="Arcanine"> 
+                                Arcanin
+                            </li>
+                        </button>
+                    </ul>
+                </form>
             </div> 
         </div>
     </div>

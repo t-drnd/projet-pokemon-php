@@ -17,13 +17,24 @@
 .pokemon_container {
   margin: 15px auto;
   width: 1000px;
+  height: auto;
   border-radius: 25px;
   background: #fff;
 }
 
-.pokemon_container ul {
+.pokemon_container form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.pokemon_container button {
+  all: unset;
+  margin: 15px;
+}
+
+.pokemon_container button:hover {
+  cursor: pointer;
 }
 
 .pokemon_container li {
@@ -33,15 +44,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 15px;
-  padding: 10px;
   background: #eeeeee;
   border-radius: 15px;
   font-size: 1.3rem;
   color: #000;
+  height: 100%;
+  padding: 15px;
+  transition: all 0.3s ease;
 }
 
-.pokemon_container li a img {
+.pokemon_container button:hover li {
+  background: #bdbdbd;
+}
+
+.pokemon_container li img {
   width: 100px;
   height: 100px;
   object-fit: contain;
