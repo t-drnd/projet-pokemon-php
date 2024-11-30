@@ -4,11 +4,13 @@ class Attack {
     private $name;
     private $power;
     private $precision;
+    private $isSpecial;
 
-    public function __construct(string $name, int $power, float $precision) {
+    public function __construct(string $name, int $power, float $precision, $isSpecial = false) {
         $this->name = $name;
         $this->power = $power;
         $this->precision = $precision;
+        $this->isSpecial = $isSpecial;
     }
 
     public function setName(string $value): self
@@ -27,6 +29,10 @@ class Attack {
         return $this;
     }
 
+    public function isSpecial()
+    {
+        return $this->isSpecial;
+    }
     
     public function getName(): string
     {

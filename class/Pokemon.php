@@ -1,13 +1,12 @@
 <?php 
 
 class Pokemon {
-    use Soigner;
     private $name;
     private $type;
     private $hp;
     private array $attaques = [];
 
-    public function __construct(string $name, string $type, int $hp, array $attaques = [])
+    public function __construct($name, $type,  $hp, $attaques)
     {
         $this->name = $name;
         $this->type = $type;
@@ -15,48 +14,34 @@ class Pokemon {
         $this->attaques = $attaques;
     }
 
-    public function setName(string $value): self
-    {
-        $this->name = $value;
-        return $this;
-    }
-    public function setType(string $value): self
-    {
-        $this->type = $value;
-        return $this;
-    }
-    public function setHP(int $value): self
-    {
-        $this->hp = $value;
-        return $this;
-    }
-
-
     public function ajouterAttaque(Attack $attaque): void
     {
         $this->attaques[] = $attaque;
     }
 
-    public function getName(): string
+    public function getName()
     {
       return $this->name;
     }
-    public function getType(): string
+    public function getType()
     {
       return $this->type;
     }
-    public function getHP(): int
+    public function getHP()
     {
       return $this->hp;
     }
 
-    public function getAttaques(): array
+    public function getAttaques()
     {
         return $this->attaques;
     }
 
     public function attack(Pokemon $adversaire, Attack $attaque) {
-        if (mt_rand(0, 100) / 100 <= $attaque->getPrecision()) {
+        $randomValue = mt_rand(0, 100) / 100; // Génère un nombre entre 0 et 1
+        echo "Valeur aléatoire générée: $randomValue\n";  // Affiche la valeur générée pour débogage
+    
+        if ($randomValue <= $attaque->getPrecision()) {
             echo "{$this->name} utilise {$attaque->getName()} sur {$adversaire->name}.\n";
             $adversaire->recevoirDegats($attaque->getPower());
         } else {
@@ -67,7 +52,7 @@ class Pokemon {
     public function recevoirDegats(int $degats): void
     {
         $this->hp = max(0, $this->hp - $degats);
-        echo "{$this->name} reçoit $degats dégâts. Il lui reste {$this->hp} pv.\n";
+        echo "{$this->name} reçoit $degats dégâts.\n";
     }
 
     public function estKO(): bool
