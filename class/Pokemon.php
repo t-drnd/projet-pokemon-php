@@ -52,7 +52,7 @@ class Pokemon {
     public function recevoirDegats(int $degats): void
     {
         $this->hp = max(0, $this->hp - $degats);
-        echo "{$this->name} reçoit $degats dégâts.\n";
+        echo "<p class=\"degatsdiv\">{$this->name} reçoit $degats dégâts.</p>\n";
     }
 
     public function estKO(): bool

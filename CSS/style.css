@@ -6,7 +6,8 @@
 
 .main {
   background: #eeeeee;
-  height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .liste_pokemon h1 {
@@ -15,8 +16,8 @@
 }
 
 .pokemon_container {
-  margin: 15px auto;
-  width: 1000px;
+  margin: 15px auto 0 auto;
+  width: 1200px;
   height: auto;
   border-radius: 25px;
   background: #fff;
@@ -31,6 +32,21 @@
 .pokemon_container button {
   all: unset;
   margin: 15px;
+}
+
+.pokemon_container .mainblock {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 115px;
+}
+
+.pokemon_container.rightblock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .pokemon_container button:hover {
@@ -61,4 +77,55 @@
   width: 100px;
   height: 100px;
   object-fit: contain;
+}
+
+.attackblock {
+  border: 1px solid #000;
+  font-size: 1.1rem;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+#pokemonblock.lippoutou-bg {
+  background-color: #d3f3f8;
+  transition: all 0.3s ease;
+}
+#pokemonblock.lippoutou-bg:hover {
+  background-color: #98ebf8;
+}
+#pokemonblock.clamiral-bg {
+  background-color: #729dfb;
+  transition: all 0.3s ease;
+}
+#pokemonblock.clamiral-bg:hover {
+  background-color: #447fff;
+}
+#pokemonblock.voltali-bg {
+  background-color: #ffffae;
+  transition: all 0.3s ease;
+}
+#pokemonblock.voltali-bg:hover {
+  background-color: #ffff70;
+}
+#pokemonblock.boustiflor-bg {
+  background-color: rgb(192, 255, 192);
+  transition: all 0.3s ease;
+}
+#pokemonblock.boustiflor-bg:hover {
+  background-color: rgb(138, 255, 138);
+}
+#pokemonblock.arcanin-bg {
+  background-color: rgb(255, 149, 149);
+  transition: all 0.3s ease;
+}
+#pokemonblock.arcanin-bg:hover {
+  background-color: rgb(241, 89, 89);
+}
+#pokemonblock.limonde-bg {
+  background-color: rgb(255, 215, 134);
+  transition: all 0.3s ease;
+}
+#pokemonblock.limonde-bg:hover {
+  background-color: rgb(221, 172, 73);
 }

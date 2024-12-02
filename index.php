@@ -1,3 +1,40 @@
+<?php
+
+require 'pokemonData.php';
+
+$pokemonList = [
+    $Lippoutou,
+    $Clamiral,
+    $Arcanin,
+    $Boustiflor,
+    $Voltali,
+    $Limonde
+];
+
+$pokemonImages = [
+    "Limonde" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif", "type" => "Sol"],
+    "Clamiral" => ["image" => "https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif", "type" => "Eau"],
+    "Voltali" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif", "type" => "Électrique"],
+    "Lippoutou" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif", "type" => "Glace"],
+    "Boustiflor" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif", "type" => "Plante"],
+    "Arcanin" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif", "type" => "Feu"]
+];
+
+$colors = [
+    "Lippoutou" => "lippoutou-bg",
+    "Clamiral" => "clamiral-bg",
+    "Voltali" => "voltali-bg",
+    "Boustiflor" => "boustiflor-bg",
+    "Arcanin" => "arcanin-bg",
+    "Limonde" => "limonde-bg",
+];
+
+
+require_once './class/Pokemon.php';
+require './class/Combat.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,54 +48,38 @@
         <div class="liste_pokemon">
             <h1>Choisissez votre Pokemon:</h1>
             <div class="pokemon_container">
-                <form action="maininterface.php" method="get">
-                        <button type="submit" name="pokemon" value="Limonde">
-                            <li>
-                                <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif" alt="Stunfisk">
-                                Limonde
-                            </li>
-                        </button>
-                        <button type="submit" name="pokemon" value="Clamiral">
-                            <li>
-                                <img src="https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif" alt="Samurott">
-                                Clamiral
-                            </li>
-                        </button>
-                        <button type="submit" name="pokemon" value="Voltali">
-                            <li>
-                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif" alt="Jolteon">
-                                Voltali
-                            </li>
-                        </button>
-                        <button type="submit" name="pokemon" value="Lippoutou">
-                            <li> 
-                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif" alt="Jynx">
-                                Lippoutou
-                            </li>
-                        </button>
-                        <button type="submit" name="pokemon" value="Boustiflor">
-                            <li> 
-                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif" alt="Weepinbell">
-                                Boustiflor
-                            </li>
-                        </button>
-                        <button type="submit" name="pokemon" value="Arcanin">
-                            <li>
-                                <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif" alt="Arcanine"> 
-                                Arcanin
-                            </li>
-                        </button>
-                    </ul>
-                </form>
+            <form action="maininterface.php" method="get">
+            <?php foreach ($pokemonList as $pokemon): ?>
+                    <button type="submit" name="pokemon" value="<?= $pokemon->getName(); ?>">
+                        <?php 
+                            $extraClass = $colors[$pokemon->getName()] ?? "";
+                        ?>
+                        <li class="<?= $extraClass; ?>" id="pokemonblock">
+                            <div class="mainblock">
+                                <div class="leftblock">
+                                    <img src="<?= $pokemonImages[$pokemon->getName()]['image']; ?>" alt="<?= $pokemon->getName(); ?>">
+                                </div>
+                                <div class="rightblock">
+                                    <?= $pokemon->getName(); ?>
+                                    <p>Type : <?= $pokemon->getType(); ?></p>
+                                    <p>HP : <?= $pokemon->getHP(); ?></p>
+                                </div>
+                            </div>
+                            
+                            <p><h4>Attaques :</h4></p>
+                            <ul>
+                                <?php foreach ($pokemon->getAttaques() as $attack): ?>
+                                    <div class="attackblock"><?= $attack->getName(); ?> (Puissance: <?= $attack->getPower(); ?>, Précision: <?= $attack->getPrecision() * 100; ?>%)</div>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    </button>
+                
+            <?php endforeach; ?>
+            </form>
             </div> 
         </div>
     </div>
 </body>
 </html>
 
-<?php
-
-require_once './class/Pokemon.php';
-require './class/Attack.php';
-require './class/Combat.php';
-require 'pokemonData.php';

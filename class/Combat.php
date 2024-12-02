@@ -21,7 +21,7 @@ class Combat {
     }
 
     public function startFight() {
-        echo "Le combat entre {$this->pokemon1->getName()} et {$this->pokemon2->getName()} commence !<br><br>";
+        echo "<h4 class=\"fightstart\">Le combat entre {$this->pokemon1->getName()} et {$this->pokemon2->getName()} commence !</h4><br>";
     
         flush();
 
@@ -40,7 +40,7 @@ class Combat {
         $attaques = $attaquant->getAttaques();
         $attaqueChoisie = $attaques[array_rand($attaques)];
         
-        echo "{$attaquant->getName()} attaque avec {$attaqueChoisie->getName()} !<br>";
+        echo "<div class=\"attaquetour\">{$attaquant->getName()} attaque avec {$attaqueChoisie->getName()} !</div>";
     
         if ($attaqueChoisie->isSpecial()) {
             $bonus = $this->calculerEffetDeType($attaquant->getType(), $defenseur->getType());
@@ -50,8 +50,8 @@ class Combat {
     
         $degats = $attaqueChoisie->getPower() * $bonus;
         $defenseur->recevoirDegats((int) $degats);
-        
-        echo "{$defenseur->getName()} a maintenant {$defenseur->getHP()} points de vie.<br><br>";
+
+         echo "<div class=\"updatepdv\">{$defenseur->getName()} a maintenant {$defenseur->getHP()} points de vie.</div>";
         flush();
     }
     
@@ -64,12 +64,12 @@ class Combat {
             $faible = self::$relationsTypes[$typeAttaquant]["faible"];
     
             if ($typeDefenseur === $fort) {
-                echo "C'est super efficace !\n";
+                echo "<p class=\"effdiv\">C'est super efficace !</p>\n";
                 return 1.5;
             }
     
             if ($typeDefenseur === $faible) {
-                echo "Ce n'est pas très efficace...\n";
+                echo "<p class=\"effdiv\">Ce n'est pas très efficace...</p>\n";
                 return 0.5; 
             }
         }
@@ -79,9 +79,9 @@ class Combat {
     public function determinerVainqueur(): void
     {
         if ($this->pokemon1->estKO()) {
-            echo "{$this->pokemon1->getName()} est KO. {$this->pokemon2->getName()} remporte la victoire !\n";
+            echo "<div class=\"kodiv\">{$this->pokemon1->getName()} est KO. {$this->pokemon2->getName()} remporte la victoire !</div>\n";
         } elseif ($this->pokemon2->estKO()) {
-            echo "{$this->pokemon2->getName()} est KO. {$this->pokemon1->getName()} remporte la victoire !\n";
+            echo "<div class=\"kodiv\">{$this->pokemon2->getName()} est KO. {$this->pokemon1->getName()} remporte la victoire !</div>\n";
         }
     }
 }

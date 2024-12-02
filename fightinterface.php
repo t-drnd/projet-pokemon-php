@@ -13,8 +13,20 @@ $pokemonImages = [
 require 'pokemonData.php'; // Assure que ce fichier inclut les classes nécessaires
 
 require './class/Combat.php'; // Inclus la classe Combat
+?>
 
-// Si les Pokémon n'ont pas encore été définis dans la session, on les initialise
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/fightinterface.css">
+    <title>Document</title>
+</head>
+<body>
+<?php
 if (!isset($_SESSION['pokemon1']) || !isset($_SESSION['pokemon2'])) {
     if (isset($_GET['pokemon']) && isset($_GET['adversaire'])) {
         $pokemonName = htmlspecialchars($_GET['pokemon']);
@@ -22,6 +34,19 @@ if (!isset($_SESSION['pokemon1']) || !isset($_SESSION['pokemon2'])) {
 
         // Vérifie si les Pokémon existent dans le tableau pokemonImages
         if (array_key_exists($pokemonName, $pokemonImages) && array_key_exists($adversaireName, $pokemonImages)) {
+            $imageURLpoke = $pokemonImages[$pokemonName]['image'];
+            $imageURLadv = $pokemonImages[$adversaireName]['image'];
+            echo "
+            <div class=\"fightdiv\">
+                <div class=\"mypokemon\">
+                <p class='selectedpokemon'>Votre pokémon : $pokemonName</p>
+                <img src='$imageURLpoke' alt='$pokemonName' class='selectedpokemonimg'>
+                </div>
+                <div class=\"adversepokemon\">
+                <p class='pokemonadverse'>Votre adversaire: $adversaireName</p>
+                <img src='$imageURLadv' alt='$adversaireName' class='selectedpokemonimg'>
+                </div>
+            </div>";
             $_SESSION['pokemon1'] = $pokemonName;
             $_SESSION['pokemon2'] = $adversaireName;
             $_SESSION['tour'] = 1; // Initialiser le tour à 1
@@ -54,13 +79,20 @@ if ($_SESSION['tour'] <= 1 && !$pokemon1Obj->estKO() && !$pokemon2Obj->estKO()) 
     $_SESSION['tour']++;
     echo "<br>";
     echo "<br>";
-    echo "<button onclick=\"window.location.href='fightinterface.php'\">Avancer</button>";
+    echo "
+    <div class=\"buttoncontainer\">
+        <button onclick=\"window.location.href='fightinterface.php'\" class=\"buttonstyle1\">Avancer</button>
+    </div>";
     exit;
 } else {
     session_unset();
     session_destroy();
     echo "<p>Le combat est terminé !</p>";
     echo "<br>";
-    echo "<button onclick=\"window.location.href='./index.php'\">Le combat est terminé, cliquez ici pour revenir à l'accueil</button>";
+    echo "<div class=\"buttoncontainer\">
+            <button onclick=\"window.location.href='./index.php'\" class=\"buttonstyle2\">Le combat est terminé, cliquez ici pour revenir à l'accueil</button>
+        </div>";
 }
 ?>
+</body>
+</html>
