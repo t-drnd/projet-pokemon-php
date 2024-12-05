@@ -42,6 +42,7 @@ if (!isset($_SESSION['pokemon1']) || !isset($_SESSION['pokemon2'])) {
                 <p class='selectedpokemon'>Votre pokémon : $pokemonName</p>
                 <img src='$imageURLpoke' alt='$pokemonName' class='selectedpokemonimg'>
                 </div>
+                <img class=\"pokeball\" src=\"./img/iconpokeball.png\" alt=\"icone pokeball\">
                 <div class=\"adversepokemon\">
                 <p class='pokemonadverse'>Votre adversaire: $adversaireName</p>
                 <img src='$imageURLadv' alt='$adversaireName' class='selectedpokemonimg'>

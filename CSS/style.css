@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Gameboy";
+  src: url("../fonts/pokemon_gb-webfont.woff2") format(woff2);
+  src: url("../fonts/pokemon_gb-webfont.woff") format(woff);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,11 +14,13 @@
   background: #eeeeee;
   height: 100%;
   box-sizing: border-box;
+  font-family: "Gameboy";
 }
 
 .liste_pokemon h1 {
   text-align: center;
-  padding: 25px 0;
+  font-size: 1.5rem;
+  padding: 40px 0;
 }
 
 .pokemon_container {
@@ -62,7 +70,7 @@
   justify-content: center;
   background: #eeeeee;
   border-radius: 15px;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   color: #000;
   height: 100%;
   padding: 15px;
@@ -79,12 +87,22 @@
   object-fit: contain;
 }
 
+.titleattaques {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+}
+
 .attackblock {
   border: 1px solid #000;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   padding: 10px;
   margin: 5px 0;
   border-radius: 8px;
+}
+
+.attackblock span {
+  font-weight: 600;
 }
 
 #pokemonblock.lippoutou-bg {

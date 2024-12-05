@@ -60,16 +60,19 @@ require './class/Combat.php';
                                     <img src="<?= $pokemonImages[$pokemon->getName()]['image']; ?>" alt="<?= $pokemon->getName(); ?>">
                                 </div>
                                 <div class="rightblock">
-                                    <?= $pokemon->getName(); ?>
+                                    <p><?= $pokemon->getName(); ?></p>
+                                    <br>
                                     <p>Type : <?= $pokemon->getType(); ?></p>
+                                    <br>
                                     <p>HP : <?= $pokemon->getHP(); ?></p>
+                                    <br>
                                 </div>
                             </div>
                             
-                            <p><h4>Attaques :</h4></p>
+                            <h4 class="titleattaques">Attaques :</h4>
                             <ul>
                                 <?php foreach ($pokemon->getAttaques() as $attack): ?>
-                                    <div class="attackblock"><?= $attack->getName(); ?> (Puissance: <?= $attack->getPower(); ?>, Précision: <?= $attack->getPrecision() * 100; ?>%)</div>
+                                    <div class="attackblock"><span><?= $attack->getName(); ?></span><br> (Puissance: <?= $attack->getPower(); ?>, Précision: <?= $attack->getPrecision() * 100; ?>%)</div>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
