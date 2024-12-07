@@ -41,7 +41,6 @@ $randomPokemon = $pokemonList[$randomKey];
             if (isset($_GET['pokemon'])) {
                 $pokemon = htmlspecialchars($_GET['pokemon']);
 
-                // Vérifie si l'image existe pour ce Pokémon
                 if (array_key_exists($pokemon, $pokemonImages)) {
                     $imageURL = $pokemonImages[$pokemon];
                     echo "<p class='selectedpokemon'>Vous avez sélectionné : $pokemon</p>";

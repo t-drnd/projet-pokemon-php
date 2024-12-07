@@ -90,7 +90,7 @@ body {
 }
 
 #fightDetailContainer {
-  position: relative; /* Définit le contexte de positionnement pour les enfants */
+  position: relative;
   font-size: 0.8rem;
   font-family: "Gameboy";
   border: 1px solid #000;
@@ -100,7 +100,7 @@ body {
   border-radius: 15px;
   background: rgb(255, 255, 241);
   margin: auto;
-  position: fixed; /* Fixe la position en bas de l'écran */
+  position: fixed;
   bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
@@ -121,11 +121,11 @@ body {
 }
 
 #nextStepButton {
-  all: unset; /* Réinitialise les styles */
-  position: absolute; /* Se positionne par rapport à #fightDetailContainer */
-  bottom: -10px; /* Décalage vers le bas par rapport à #fightDetailContainer */
-  right: 0; /* Centre horizontalement */
-  display: flex; /* Centre le contenu du bouton */
+  all: unset;
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;
@@ -136,8 +136,8 @@ body {
 }
 
 #nextStepButton i {
-  font-size: 1.2rem; /* Taille de l’icône */
-  color: #000; /* Couleur de l’icône */
+  font-size: 1.2rem;
+  color: #000;
   background: none;
 }
 
