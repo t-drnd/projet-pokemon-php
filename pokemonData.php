@@ -7,12 +7,12 @@ $baseattack1 = new Attack ("Charge", 20, 0.95, false);
 $baseattack2 = new Attack ("Vive-Attaque", 20, 1.00, false);
 $baseattack3 = new Attack ("Coupe", 25, 0.90, false);
 
-$specialATKFire = new Attack("Pied Brûleur", 45, 0.90, true);
-$specialATKWater = new Attack("Hydrocanon", 55, 0.85, true);
-$specialATKIce = new Attack("Laser Glace", 45, 1.00, true);
-$specialATKPlant = new Attack("Fouet Lianes", 45, 1.00, true);
-$specialATKElectric = new Attack("Tonnerre", 45, 1.00, true);
-$specialATKGround = new Attack("Tir de Boue", 40, 1.00, true);
+$specialATKFire = new Attack("Pied Brûleur", 50, 0.90, true);
+$specialATKWater = new Attack("Hydrocanon", 70, 0.85, true);
+$specialATKIce = new Attack("Laser Glace", 50, 1.00, true);
+$specialATKPlant = new Attack("Fouet Lianes", 50, 1.00, true);
+$specialATKElectric = new Attack("Tonnerre", 50, 1.00, true);
+$specialATKGround = new Attack("Tir de Boue", 20, 1.00, true);
 
 $Lippoutou = new Pokemon('Lippoutou', "Glace", 110, [$specialATKIce, $baseattack1, $baseattack2, $baseattack3]);
 $Clamiral = new Pokemon("Clamiral", "Eau", 130, [$specialATKWater, $baseattack1, $baseattack2, $baseattack3]);

@@ -10,21 +10,29 @@ class Combat {
         "Plante" => ["faible" => "Feu", "fort" => "Eau"],
         "Electrique" => ["faible" => "Sol", "fort" => "Eau"],
         "Sol" => ["faible" => "Plante", "fort" => "Electrique"],
-        "Glace" => ["faible" => "feu", "fort" => "sol"],
+        "Glace" => ["faible" => "Feu", "fort" => "Sol"],
     ];
 
+    public array $fightdetail = [];
 
-    public function __construct($pokemon1, $pokemon2)
+
+    public function __construct($pokemon1, $pokemon2, array $fightdetail = [])
     {
         $this->pokemon1 = $pokemon1;
         $this->pokemon2 = $pokemon2;
+        $this->fightdetail = $fightdetail;
+    }
+
+    public function setFightDetail(string $value) {
+        $this->fightdetail[] = $value;
+        return $this;
+    }
+
+    public function getFightDetail(): array {
+        return $this->fightdetail;
     }
 
     public function startFight() {
-        echo "<h4 class=\"fightstart\">Le combat entre {$this->pokemon1->getName()} et {$this->pokemon2->getName()} commence !</h4><br>";
-    
-        flush();
-
         while (!$this->pokemon1->estKO() && !$this->pokemon2->estKO()) {
             $this->tourDeCombat($this->pokemon1, $this->pokemon2);
             if ($this->pokemon2->estKO()) break;
@@ -40,7 +48,7 @@ class Combat {
         $attaques = $attaquant->getAttaques();
         $attaqueChoisie = $attaques[array_rand($attaques)];
         
-        echo "<div class=\"attaquetour\">{$attaquant->getName()} attaque avec {$attaqueChoisie->getName()} !</div>";
+        $this->setFightDetail("{$attaquant->getName()} attaque avec {$attaqueChoisie->getName()} !");
     
         if ($attaqueChoisie->isSpecial()) {
             $bonus = $this->calculerEffetDeType($attaquant->getType(), $defenseur->getType());
@@ -50,10 +58,10 @@ class Combat {
     
         $degats = $attaqueChoisie->getPower() * $bonus;
         $defenseur->recevoirDegats((int) $degats);
+        $this->setFightDetail("{$defenseur->getName()} reçoit $degats dégâts.");
 
-         echo "<div class=\"updatepdv\">{$defenseur->getName()} a maintenant {$defenseur->getHP()} points de vie.</div>";
-        flush();
-    }
+         $this->setFightDetail("{$defenseur->getName()} a maintenant {$defenseur->getHP()} points de vie.");
+        }
     
     
 
@@ -64,12 +72,12 @@ class Combat {
             $faible = self::$relationsTypes[$typeAttaquant]["faible"];
     
             if ($typeDefenseur === $fort) {
-                echo "<p class=\"effdiv\">C'est super efficace !</p>\n";
-                return 1.5;
+                $this->setFightDetail("C'est super efficace !");
+                return 2;
             }
     
             if ($typeDefenseur === $faible) {
-                echo "<p class=\"effdiv\">Ce n'est pas très efficace...</p>\n";
+                $this->setFightDetail("Ce n'est pas très efficace...");
                 return 0.5; 
             }
         }
@@ -79,9 +87,9 @@ class Combat {
     public function determinerVainqueur(): void
     {
         if ($this->pokemon1->estKO()) {
-            echo "<div class=\"kodiv\">{$this->pokemon1->getName()} est KO. {$this->pokemon2->getName()} remporte la victoire !</div>\n";
+            $this->setFightDetail("{$this->pokemon1->getName()} est KO. {$this->pokemon2->getName()} remporte la victoire !");
         } elseif ($this->pokemon2->estKO()) {
-            echo "<div class=\"kodiv\">{$this->pokemon2->getName()} est KO. {$this->pokemon1->getName()} remporte la victoire !</div>\n";
+            $this->setFightDetail("{$this->pokemon2->getName()} est KO. {$this->pokemon1->getName()} remporte la victoire !");
         }
     }
 }

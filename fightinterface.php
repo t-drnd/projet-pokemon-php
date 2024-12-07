@@ -1,18 +1,18 @@
 <?php
-session_start(); // Démarre la session pour garder l'état entre les tours
+session_start();
 
 $pokemonImages = [
-    "Limonde" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif", "type" => "Sol"],
-    "Clamiral" => ["image" => "https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif", "type" => "Eau"],
-    "Voltali" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif", "type" => "Électrique"],
-    "Lippoutou" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif", "type" => "Glace"],
-    "Boustiflor" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif", "type" => "Plante"],
-    "Arcanin" => ["image" => "https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif", "type" => "Feu"]
+    "Limonde" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white/anim/shiny/stunfisk.gif", "type" => "Sol", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-shiny/stunfisk.gif"],
+    "Clamiral" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white-2/anim/normal/samurott.gif", "type" => "Eau", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-normal/samurott.gif"],
+    "Voltali" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jolteon.gif", "type" => "Électrique", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-normal/jolteon.gif"],
+    "Lippoutou" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white/anim/normal/jynx.gif", "type" => "Glace", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-normal/jynx.gif"],
+    "Boustiflor" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white/anim/normal/weepinbell.gif", "type" => "Plante", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-normal/weepinbell.gif"],
+    "Arcanin" => ["imagefront" => "https://img.pokemondb.net/sprites/black-white/anim/normal/arcanine.gif", "type" => "Feu", "imageback" => "https://img.pokemondb.net/sprites/black-white/anim/back-normal/arcanine.gif"]
 ];
 
-require 'pokemonData.php'; // Assure que ce fichier inclut les classes nécessaires
+require 'pokemonData.php';
 
-require './class/Combat.php'; // Inclus la classe Combat
+require './class/Combat.php'; 
 ?>
 
 
@@ -22,35 +22,36 @@ require './class/Combat.php'; // Inclus la classe Combat
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/fightinterface.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />    <link rel="stylesheet" href="./CSS/fightinterface.css">
     <title>Document</title>
 </head>
 <body>
 <?php
-if (!isset($_SESSION['pokemon1']) || !isset($_SESSION['pokemon2'])) {
     if (isset($_GET['pokemon']) && isset($_GET['adversaire'])) {
         $pokemonName = htmlspecialchars($_GET['pokemon']);
         $adversaireName = htmlspecialchars($_GET['adversaire']);
 
-        // Vérifie si les Pokémon existent dans le tableau pokemonImages
         if (array_key_exists($pokemonName, $pokemonImages) && array_key_exists($adversaireName, $pokemonImages)) {
-            $imageURLpoke = $pokemonImages[$pokemonName]['image'];
-            $imageURLadv = $pokemonImages[$adversaireName]['image'];
+            $imageURLpoke = $pokemonImages[$pokemonName]['imageback'];
+            $imageURLadv = $pokemonImages[$adversaireName]['imagefront'];
             echo "
             <div class=\"fightdiv\">
                 <div class=\"mypokemon\">
-                <p class='selectedpokemon'>Votre pokémon : $pokemonName</p>
-                <img src='$imageURLpoke' alt='$pokemonName' class='selectedpokemonimg'>
+                <img src='$imageURLpoke' alt='$pokemonName' class='selectedpokemonimg poke1img'>
                 </div>
-                <img class=\"pokeball\" src=\"./img/iconpokeball.png\" alt=\"icone pokeball\">
                 <div class=\"adversepokemon\">
-                <p class='pokemonadverse'>Votre adversaire: $adversaireName</p>
-                <img src='$imageURLadv' alt='$adversaireName' class='selectedpokemonimg'>
+                <img src='$imageURLadv' alt='$adversaireName' class='selectedpokemonimg poke2img'>
                 </div>
             </div>";
             $_SESSION['pokemon1'] = $pokemonName;
             $_SESSION['pokemon2'] = $adversaireName;
-            $_SESSION['tour'] = 1; // Initialiser le tour à 1
+            $_SESSION['tour'] = 1;
         } else {
             echo "<p>Un ou plusieurs Pokémon sont inconnus.</p>";
             exit;
@@ -59,41 +60,52 @@ if (!isset($_SESSION['pokemon1']) || !isset($_SESSION['pokemon2'])) {
         echo "<p>Paramètres manquants.</p>";
         exit;
     }
-}
+
 
 $pokemon1 = $_SESSION['pokemon1'];
 $pokemon2 = $_SESSION['pokemon2'];
 
-// Récupérer directement les objets Pokémon à partir des variables globales
-// Par exemple, $Lippoutou, $Clamiral, etc. doivent être définis dans pokemonData.php
-global $$pokemon1, $$pokemon2;  // Permet d'utiliser le nom du Pokémon dans la session comme variable
-$pokemon1Obj = $$pokemon1;  // Récupère l'objet Pokémon de la variable correspondante
-$pokemon2Obj = $$pokemon2;  // Idem pour l'adversaire
+global $$pokemon1, $$pokemon2; 
+$pokemon1Obj = $$pokemon1;
+$pokemon2Obj = $$pokemon2; 
 
-// Créer une instance de Combat avec les objets Pokémon
 $combat = new Combat($pokemon1Obj, $pokemon2Obj);
+$combat->startFight();
+$combat->getFightDetail();
+$fightDetails = json_encode($combat->fightdetail);
 
-// Vérifier si le combat est en cours
-if ($_SESSION['tour'] <= 1 && !$pokemon1Obj->estKO() && !$pokemon2Obj->estKO()) {
-    // Démarrer le combat
-    $combat->startFight();
-    $_SESSION['tour']++;
-    echo "<br>";
-    echo "<br>";
-    echo "
-    <div class=\"buttoncontainer\">
-        <button onclick=\"window.location.href='fightinterface.php'\" class=\"buttonstyle1\">Avancer</button>
-    </div>";
-    exit;
-} else {
-    session_unset();
-    session_destroy();
-    echo "<p>Le combat est terminé !</p>";
-    echo "<br>";
-    echo "<div class=\"buttoncontainer\">
-            <button onclick=\"window.location.href='./index.php'\" class=\"buttonstyle2\">Le combat est terminé, cliquez ici pour revenir à l'accueil</button>
-        </div>";
-}
 ?>
+
+<div class="scriptcontainer">
+    <div id="fightDetailContainer">
+        <p id="fightDetail">Cliquez sur le bouton pour commencer le combat.</p>
+        <button id="nextStepButton"><i class="fa-solid fa-caret-down"></i></button>
+    </div>
+</div>
+
+<script>
+    let currentStep = 0;
+
+    function showStep() {
+        const fightDetailElement = document.getElementById('fightDetail');
+        if (currentStep < fightDetails.length) {
+            fightDetailElement.textContent = fightDetails[currentStep];
+            currentStep++;
+        } else {
+            fightDetailElement.textContent = "Le combat est terminé !";
+
+            const button = document.getElementById('nextStepButton');
+
+            button.addEventListener('click', () => {
+                window.location.href = "index.php";
+            })
+        }
+    }
+
+    document.getElementById('nextStepButton').addEventListener('click', showStep);
+</script>
+<script>
+    const fightDetails = <?= $fightDetails; ?>;
+</script>
 </body>
 </html>
