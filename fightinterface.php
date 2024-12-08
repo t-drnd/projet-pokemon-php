@@ -44,9 +44,17 @@ require './class/Combat.php';
             <div class=\"fightdiv\">
                 <div class=\"mypokemon\">
                 <img src='$imageURLpoke' alt='$pokemonName' class='selectedpokemonimg poke1img'>
+                    <div class=\"pokemon1info\">
+                        <p class=\"pokemonname1\">$pokemonName</p>
+                        <div id=\"pokemon1hp\"></div>
+                    </div>
                 </div>
                 <div class=\"adversepokemon\">
                 <img src='$imageURLadv' alt='$adversaireName' class='selectedpokemonimg poke2img'>
+                    <div class=\"pokemon2info\">
+                        <p class=\"pokemonname2\">$adversaireName</p>
+                        <div id=\"pokemon2hp\"></div>
+                    </div>
                 </div>
             </div>";
             $_SESSION['pokemon1'] = $pokemonName;
@@ -72,7 +80,9 @@ $pokemon2Obj = $$pokemon2;
 $combat = new Combat($pokemon1Obj, $pokemon2Obj);
 $combat->startFight();
 $combat->getFightDetail();
+$combat->getPVdetail();
 $fightDetails = json_encode($combat->fightdetail);
+$pvdetails = json_encode($combat->PVdetail);
 
 ?>
 
@@ -84,12 +94,42 @@ $fightDetails = json_encode($combat->fightdetail);
 </div>
 
 <script>
+    const fightDetails = <?= $fightDetails; ?>;
+    const pvDetails = <?= $pvdetails; ?>;
+</script>
+<script>
+    console.log(pvDetails);
     let currentStep = 0;
+    let currenthp = 0;
+    const hpcontainer1 = document.getElementById('pokemon1hp');
+    const hpcontainer2 = document.getElementById('pokemon2hp');
+
+    hpcontainer1.innerHTML = `
+        <p class="hpline"><?php echo $pokemon1Obj->getmaxHP()?> / <?php echo $pokemon1Obj->getmaxHP()?></p>
+    `
+
+    hpcontainer2.innerHTML = `
+        <p class="hpline"><?php echo $pokemon2Obj->getmaxHP()?> / <?php echo $pokemon2Obj->getmaxHP()?></p>
+    `
 
     function showStep() {
         const fightDetailElement = document.getElementById('fightDetail');
+
         if (currentStep < fightDetails.length) {
             fightDetailElement.textContent = fightDetails[currentStep];
+            if(currentStep % 3 == 0 && currenthp <= pvDetails.length) {
+                if (currenthp % 2 !== 0) {
+                    hpcontainer1.innerHTML = `
+                        <p>${pvDetails[currenthp]}/ <?php echo $pokemon1Obj->getmaxHP()?></p>
+                    `
+                    currenthp++;
+                } else {
+                    hpcontainer2.innerHTML = `
+                        <p>${pvDetails[currenthp]}/ <?php echo $pokemon2Obj->getmaxHP()?></p>
+                    `
+                    currenthp++;
+                }
+            }
             currentStep++;
         } else {
             fightDetailElement.textContent = "Le combat est terminé !";
@@ -103,9 +143,6 @@ $fightDetails = json_encode($combat->fightdetail);
     }
 
     document.getElementById('nextStepButton').addEventListener('click', showStep);
-</script>
-<script>
-    const fightDetails = <?= $fightDetails; ?>;
 </script>
 </body>
 </html>

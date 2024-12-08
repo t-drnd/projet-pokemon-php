@@ -15,12 +15,15 @@ class Combat {
 
     public array $fightdetail = [];
 
+    public array $PVdetail = [];
 
-    public function __construct($pokemon1, $pokemon2, array $fightdetail = [])
+
+    public function __construct($pokemon1, $pokemon2, array $fightdetail = [], array $PVdetail = [])
     {
         $this->pokemon1 = $pokemon1;
         $this->pokemon2 = $pokemon2;
         $this->fightdetail = $fightdetail;
+        $this->PVdetail = $PVdetail;
     }
 
     public function setFightDetail(string $value) {
@@ -30,6 +33,14 @@ class Combat {
 
     public function getFightDetail(): array {
         return $this->fightdetail;
+    }
+    public function setPVdetail(string $value) {
+        $this->PVdetail[] = $value;
+        return $this;
+    }
+
+    public function getPVdetail(): array {
+        return $this->PVdetail;
     }
 
     public function startFight() {
@@ -58,6 +69,7 @@ class Combat {
     
         $degats = $attaqueChoisie->getPower() * $bonus;
         $defenseur->recevoirDegats((int) $degats);
+        $this->setPVdetail($defenseur->getHP());
         $this->setFightDetail("{$defenseur->getName()} reçoit $degats dégâts.");
 
          $this->setFightDetail("{$defenseur->getName()} a maintenant {$defenseur->getHP()} points de vie.");
